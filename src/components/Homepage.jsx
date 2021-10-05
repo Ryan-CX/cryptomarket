@@ -1,17 +1,22 @@
 import React from 'react';
 import millify from 'millify';
-import { useGetCryptosQuery } from '../services/cryptoApi';
 import { Typography, Row, Col, Statistic } from 'antd';
 import { Link } from 'react-router-dom';
+
+import { useGetCryptosQuery } from '../services/cryptoApi';
+import Cryptocurrencies from './Cryptocurrencies';
+import News from './News';
+import Loader from './Loader';
+
 const { Title } = Typography;
 
 const Homepage = () => {
-	const { data, isFetching } = useGetCryptosQuery();
+	const { data, isFetching } = useGetCryptosQuery(10);
+	console.log(data);
 	const globalStats = data?.data?.stats;
 
-	if (isFetching) {
-		return <div>Loading...</div>;
-	}
+	if (isFetching) return <Loader />;
+
 	return (
 		<>
 			<Title level={2} className='heading'>
@@ -30,16 +35,18 @@ const Homepage = () => {
 				<Col span={12}>
 					<Statistic
 						title='Total Market Cap:'
-						value={millify(globalStats.totalMarketCap)}
+						value={`$${millify(globalStats.totalMarketCap)}`}
 					/>
 				</Col>
 				<Col span={12}>
 					<Statistic
 						title='Total 24h Volume'
-						value={millify(globalStats.total24hVolume)}
+						value={`$${millify(globalStats.total24hVolume)}`}
 					/>
 				</Col>
-
+				<Col span={12}>
+					<Statistic title='Total Cryptocurrencies' value={globalStats.total} />
+				</Col>
 				<Col span={12}>
 					<Statistic
 						title='Total Markets'
@@ -55,7 +62,7 @@ const Homepage = () => {
 					<Link to='/cryptocurrencies'>Show more</Link>
 				</Title>
 			</div>
-			{/* <Cryptocurrencies simplified />
+			<Cryptocurrencies simplified />
 			<div className='home-heading-container'>
 				<Title level={2} className='home-title'>
 					Latest Crypto News
@@ -64,7 +71,7 @@ const Homepage = () => {
 					<Link to='/news'>Show more</Link>
 				</Title>
 			</div>
-			<News simplified /> */}
+			<News simplified />
 		</>
 	);
 };

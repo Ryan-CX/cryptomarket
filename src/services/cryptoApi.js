@@ -1,20 +1,15 @@
-// logic for crypto api fetching
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// Coinranking api snippets
 
 const cryptoApiHeaders = {
-	'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
 	'x-rapidapi-key': 'f3a4b48122mshc2ebd183c9a0d33p186e68jsn7fc10498a7ce',
+	'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
 };
-
-const baseUrl = 'https://coinranking1.p.rapidapi.com';
 
 const createRequest = (url) => ({ url, headers: cryptoApiHeaders });
 
-//we create a new api and use it in the store.js, we also have the getCryptos query and we export that
 export const cryptoApi = createApi({
 	reducerPath: 'cryptoApi',
-	baseQuery: fetchBaseQuery({ baseUrl }),
+	baseQuery: fetchBaseQuery({ baseUrl: 'https://coinranking1.p.rapidapi.com' }),
 	endpoints: (builder) => ({
 		getCryptos: builder.query({
 			query: (count) => createRequest(`/coins?limit=${count}`),
@@ -31,8 +26,6 @@ export const cryptoApi = createApi({
 		}),
 	}),
 });
-
-//redux-toolkit query is a function that takes a builder object and returns a query object, and we can get all data from the api with the query object
 
 export const {
 	useGetCryptosQuery,
