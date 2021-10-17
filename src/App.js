@@ -43,7 +43,7 @@ const App = () => {
 					</div>
 				</Layout>
 
-				<div className='footer'>
+				{/* <div className='footer'>
 					<Typography.Title
 						level={5}
 						style={{ color: 'white', textAlign: 'center' }}
@@ -57,7 +57,7 @@ const App = () => {
 						<Link to='/Cryptocurrencies'>Cryptocurrencies</Link>
 						<Link to='/News'>News</Link>
 					</Space>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
