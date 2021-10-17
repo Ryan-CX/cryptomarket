@@ -21,7 +21,7 @@ const App = () => {
 
 			<div className='main'>
 				{/* implement the routing below using react-router-dom */}
-				<Layout>
+				{/* <Layout>
 					<div className='routes'>
 						<Switch>
 							<Route exact path='/'>
@@ -41,7 +41,7 @@ const App = () => {
 							</Route>
 						</Switch>
 					</div>
-				</Layout>
+				</Layout> */}
 
 				{/* <div className='footer'>
 					<Typography.Title
